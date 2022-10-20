@@ -1,0 +1,106 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Number Guessing Game</title>
+
+    <style>
+        html {
+            font-family: sans-serif;
+        }
+        
+        body {
+            background-color: whitesmoke;
+            width: 50%;
+            max-width: 800px;
+            min-width: 480px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Number Gussing Game</h1>
+
+    <p>We have selected a random number. See if you can guess it.</p>
+    <p id="username"> </p>
+    <p id="user"></p>
+    <p id="ponts"></p>
+
+
+
+
+    <div class="form">
+
+        <label for="guessField">Enter a guess: </label>
+        <input type="text" id="guessField" class="guessField">
+
+
+        <input type="submit" value="Submit guess" class="guessSubmit" id="submitguess">
+    </div>
+
+    <script type="text/javascript">
+        //Getting username from player
+        const name = window.prompt("Enter your name:", "");
+
+        document.getElementById("username").innerHTML =
+            "Hey Welcome: " + name + " Goodluck Playing! ";
+        // random value generated
+
+
+        const generateRandomNumber = (range) => Math.floor(Math.random() * range + 1);
+        // var generatedNumber = Math.floor(Math.random() * 2 + 1);
+        let randomNumberRange = 2;
+        var generatedNumber = generateRandomNumber(randomNumberRange);
+
+        // counting the number of guesses
+        // made for correct Guess
+        var guess = 1;
+        var point = 0;
+        var currentStage = 1;
+        var maximumNumberOfStage = 3;
+
+        do {
+
+            document.getElementById("submitguess").onclick = function() {
+
+                // number guessed by user     
+                var userInput = document.getElementById("guessField").value;
+
+                if (userInput == generatedNumber) {
+                    point++;
+                    alert("CONGRATULATIONS!!! YOU GUESSED IT RIGHT IN " +
+                        guess + " GUESS " + " You have earned " + point + " Points");
+                    currentStage++;
+                    generatedNumber = generateRandomNumber(randomNumberRange++);
+                    alert("Stage 2 Enter a number from 1 - 3 ");
+
+                    var userInput = document.getElementById("guessField").value;
+
+                    generatedNumber = generateRandomNumber(randomNumberRange++);
+
+
+
+                    // alert(generatedNumber);
+
+                } else if (userInput > generatedNumber)
+                /* if guessed number is greater
+           than actual number*/
+                {
+
+                    guess++;
+
+                    alert("OOPS SORRY!! TRY A SMALLER NUMBER");
+                } else {
+                    guess++;
+
+                    alert("OOPS SORRY!! TRY A GREATER NUMBER")
+                }
+
+
+            }
+        } while (maximumNumberOfStage < currentStage);
+    </script>
+</body>
+
+</html>
